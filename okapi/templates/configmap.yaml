@@ -1,0 +1,64 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hazelcast
+  namespace: {{ .Values.namespace.name }}
+data:
+  hazelcast.xml: |
+    <?xml version="1.0" encoding="UTF-8"?>
+    <hazelcast xmlns="http://www.hazelcast.com/schema/config"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://www.hazelcast.com/schema/config
+               https://www.hazelcast.com/schema/config/hazelcast-config-4.2.xsd">
+      <cluster-name>okapi-cluster</cluster-name>
+      <network>
+        <join>
+          <multicast enabled="false"/>
+          <kubernetes enabled="true">
+            <namespace>okapi-cluster</namespace>
+            <service-name>okapi</service-name>
+          </kubernetes>
+        </join>
+      </network>
+      <multimap name="__vertx.subs">
+        <backup-count>1</backup-count>
+        <value-collection-type>SET</value-collection-type>
+      </multimap>
+      <map name="__vertx.haInfo">
+        <backup-count>1</backup-count>
+      </map>
+      <map name="__vertx.nodeInfo">
+        <backup-count>1</backup-count>
+      </map>
+      <cp-subsystem>
+        <cp-member-count>0</cp-member-count>
+        <semaphores>
+          <semaphore>
+            <name>__vertx.*</name>
+            <jdk-compatible>false</jdk-compatible>
+            <initial-permits>1</initial-permits>
+          </semaphore>
+        </semaphores>
+      </cp-subsystem>
+    </hazelcast>
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: okapi-log4j2-xml
+  namespace: {{ .Values.namespace.name }}
+data:
+  log4j2.xml: |
+    <Configuration status="WARN" monitorInterval="30">
+      <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+          <!-- date, log level, class, message, exception -->
+          <PatternLayout alwaysWriteExceptions="false" pattern="%d{ISO8601}\t%p\t%C{1}\t%replace{%replace{%m}{\r?\n}{ \| }}{\t}{  }\t%replace{%replace{%xEx{short}}{\r?\n}{ \| }}{\t}{  }%n"/>
+        </Console>
+      </Appenders>
+      <Loggers>
+        <Root level="INFO">
+          <AppenderRef ref="Console"/>
+        </Root>
+      </Loggers>
+    </Configuration>
