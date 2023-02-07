@@ -4,39 +4,12 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: {{ include "okapi.fullname" . }}
+  namespace: {{ .Values.namespace.name }}
   labels:
 {{ include "okapi.labels" . | indent 4 }}
-  namespace: {{ .Values.namespace.name }} ##create this before pushing
 spec:
-{{- if .Values.persistentVolume.enabled }}
-  volumeClaimTemplates:
-    - metadata:
-        name: {{ .Values.persistentVolume.name }}
-        annotations:
-{{ tpl (toYaml .Values.persistentVolume.annotations) . | indent 10 }}
-        labels:
-{{ tpl (toYaml .Values.persistentVolume.labels) . | indent 10 }}
-      spec:
-        accessModes:
-        {{- range .Values.persistentVolume.accessModes }}
-          - {{ . | quote }}
-        {{- end }}
-        resources:
-          requests:
-            storage: {{ .Values.persistentVolume.size | quote }}
-      {{- if .Values.persistentVolume.storageClass }}
-      {{- if (eq "-" .Values.persistentVolume.storageClass) }}
-        storageClassName: ""
-      {{- else }}
-        storageClassName: "{{ .Values.persistentVolume.storageClass }}"
-      {{- end }}
-      {{- end }}
-{{- else }}
-        - name: {{ .Values.persistentVolume.name }}
-          emptyDir: {}
-{{- end }}
   podManagementPolicy: {{ .Values.podManagementPolicy }}
-  serviceName: {{ .Values.service.name }} ##create this
+  serviceName: {{ .Values.service.name }}
   replicas: {{ .Values.replicaCount }}
   updateStrategy:
     type: {{ .Values.updateStrategy }}
@@ -67,7 +40,7 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          args:
+        args:
             - cluster
             - "-conf"
             - /etc/okapi-config.json
@@ -75,13 +48,6 @@ spec:
             - /etc/hazelcast.xml
             - "-cluster-host"
             - $(POD_IP)
-          {{- if .Values.fuse.enabled }}
-          securityContext:
-            privileged: true
-            capabilities:
-              add:
-                - SYS_ADMIN
-          {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
@@ -138,25 +104,24 @@ spec:
             readOnly: true
             mountPath: "/etc/log4j2.xml"
             subPath: "log4j2.xml"
-          - name: "okapi-config"
-            mountPath: "/etc/okapi-config.json"
-            subPath: "okapi-config.json"
           env:
             - name: POD_IP
-            valueFrom:
-              fieldRef:
-                apiVersion: v1
-                fieldPath: status.podIP
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: status.podIP
            - name: POD_NAME
-            valueFrom:
-              fieldRef:
-                apiVersion: v1
-                fieldPath: metadata.name
+             valueFrom:
+               fieldRef:
+                 apiVersion: v1
+                 fieldPath: metadata.name
+           - name: JAVA_OPTIONS
+             value: "-Djava.awt.headless=true -Dlog4j.configurationFile=/etc/log4j2.xml -Dhost=$(POD_IP) -Dnodename=$(POD_NAME) -Dhazelcast.logging.type=log4j -Dhazelcast.shutdownhook.policy=GRACEFUL -Dhazelcast.graceful.shutdown.max.wait=300 -Dlog4j2.formatMsgNoLookups=true"
             {{- range $key, $value := .Values.config }}
             - name: {{ $key }}
               value: {{ $value | quote }}
             {{- end }}
-            {{- range $key, $value := .Values.secret }}
+            {{- range $key, $value := .Values.secret.secret }}
             - name: {{ $key }}
               valueFrom:
                 secretKeyRef:
@@ -169,35 +134,5 @@ spec:
       - name: "log4j2-xml"
         configMap:
           name: okapi-log4j2-xml
-      - name: "okapi-config"
-        secret:
-          secretName: okapi-config-secret
-          defaultMode: 420
-            {{- end }}
-      {{- if .Values.eks_iam.enabled }}
-      securityContext:
-        fsGroup: 65534
-      {{- end }}
-      {{- if .Values.nodeSelector }}
-      nodeSelector:
-{{ toYaml .Values.nodeSelector | indent 8 }}
-      {{- end }}
-      {{- if .Values.tolerations }}
-      tolerations:
-{{ toYaml .Values.tolerations | indent 8 }}
-      {{- end }}
-      {{- if .Values.schedulerName }}
-      schedulerName: "{{ .Values.schedulerName }}"
-      {{- end }}
-      {{- if .Values.affinity }}
-      affinity:
-      {{- with .Values.affinity }}
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- else }}
-      {{- end }}
-
-      {{- if .Values.priorityClassName }}
-      priorityClassName: {{ .Values.priorityClassName }}
-      {{- end }}
+{{- end }}
 {{- end }}
