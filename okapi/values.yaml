@@ -15,8 +15,8 @@ updateStrategy: RollingUpdate
 replicaCount: 3
 
 clustered:
-  enabled: "yes"
-  disabled: true
+  enabled: "false"
+  
 image:
   repository: folioorg/okapi
   pullPolicy: Always
@@ -92,7 +92,7 @@ ingress:
   className: ""
   annotations: 
     kubernetes.io/ingress.class: "nginx"
-    external-dns.alpha.kubernetes.io/target: "3739406b-kubesystem-foliod-57fa-596039908.us-east-1.elb.amazonaws.com"
+    #external-dns.alpha.kubernetes.io/target: "3739406b-kubesystem-foliod-57fa-596039908.us-east-1.elb.amazonaws.com"
     nginx.ingress.kubernetes.io/proxy-body-size: "10000m"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
     nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
@@ -162,12 +162,10 @@ tolerations: []
 
 affinity: {}
 
-secret:
-  create: true
-  secret: 
-    - secrets.json
 
+secret: {"storage": "postgres","postgres_host": "folio-eks-dev-1-okapi.ccnbl3q7tlkp.us-east-1.rds.amazonaws.com","postgres_username": "okapi_cluster","postgres_password": "9CBlMTQ3MmIQwZUF","postgres_database": "okapi_cluster","okapiurl": "http://okapi:9130"}
 secrets: []
+
 
 podDisruptionBudgetEnabled: true
 podDisruptionBudget:

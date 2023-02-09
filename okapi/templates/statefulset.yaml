@@ -1,5 +1,5 @@
 {{- $fullName := include "okapi.fullname" . -}}
-{{- if .Values.clustered.enabled }}
+{{- if eq .Values.clustered.enabled "true" }}
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -40,7 +40,7 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-        args:
+          args:
             - cluster
             - "-conf"
             - /etc/okapi-config.json
@@ -48,6 +48,23 @@ spec:
             - /etc/hazelcast.xml
             - "-cluster-host"
             - $(POD_IP)
+          env:
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: status.podIP
+            - name: POD_NAME
+              valueFrom:
+               fieldRef:
+                 apiVersion: v1
+                 fieldPath: metadata.name
+            - name: JAVA_OPTIONS
+              value: "-Djava.awt.headless=true -Dlog4j.configurationFile=/etc/log4j2.xml -Dhost=$(POD_IP) -Dnodename=$(POD_NAME) -Dhazelcast.logging.type=log4j -Dhazelcast.shutdownhook.policy=GRACEFUL -Dhazelcast.graceful.shutdown.max.wait=300 -Dlog4j2.formatMsgNoLookups=true"
+            {{- range $key, $value := .Values.config }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
@@ -104,35 +121,43 @@ spec:
             readOnly: true
             mountPath: "/etc/log4j2.xml"
             subPath: "log4j2.xml"
-          env:
-            - name: POD_IP
-              valueFrom:
-                fieldRef:
-                  apiVersion: v1
-                  fieldPath: status.podIP
-           - name: POD_NAME
-             valueFrom:
-               fieldRef:
-                 apiVersion: v1
-                 fieldPath: metadata.name
-           - name: JAVA_OPTIONS
-             value: "-Djava.awt.headless=true -Dlog4j.configurationFile=/etc/log4j2.xml -Dhost=$(POD_IP) -Dnodename=$(POD_NAME) -Dhazelcast.logging.type=log4j -Dhazelcast.shutdownhook.policy=GRACEFUL -Dhazelcast.graceful.shutdown.max.wait=300 -Dlog4j2.formatMsgNoLookups=true"
-            {{- range $key, $value := .Values.config }}
-            - name: {{ $key }}
-              value: {{ $value | quote }}
-            {{- end }}
-            {{- range $key, $value := .Values.secret.secret }}
-            - name: {{ $key }}
-              valueFrom:
-                secretKeyRef:
-                  name: {{ $fullName }}
-                  key: {{ $key }}
+          - name: "okapi-config"
+            mountPath: "/etc/okapi-config.json"
+            subPath: "okapi-config.json"
       volumes:
-      - name: "hazelcast"
-        configMap:
-          name: "hazelcast"
-      - name: "log4j2-xml"
-        configMap:
-          name: okapi-log4j2-xml
+        - name: "hazelcast"
+          configMap:
+            name: "hazelcast"
+        - name: "log4j2-xml"
+          configMap:
+            name: okapi-log4j2-xml
+        - name: "okapi-config"
+          secret:
+            secretName: {{ include "okapi.fullname" . }}
+            defaultMode: 420
+      {{- if .Values.nodeSelector }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.nodeSelector | indent 8 }}
+      {{- end }}
+      {{- if .Values.tolerations }}
+      tolerations:
+{{ toYaml .Values.tolerations | indent 8 }}
+      {{- end }}
+      {{- if .Values.schedulerName }}
+      schedulerName: "{{ .Values.schedulerName }}"
+      {{- end }}
+      {{- if .Values.affinity }}
+      affinity:
+      {{- with .Values.affinity }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- else }}
+      {{- end }}
+
+      {{- if .Values.priorityClassName }}
+      priorityClassName: {{ .Values.priorityClassName }}
+      {{- end }}
 {{- end }}
 {{- end }}
+

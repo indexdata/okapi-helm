@@ -10,13 +10,15 @@ data:
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                xsi:schemaLocation="http://www.hazelcast.com/schema/config
                https://www.hazelcast.com/schema/config/hazelcast-config-4.2.xsd">
+      {{- if eq .Values.clustered.enabled "true" }}         
       <cluster-name>okapi-cluster</cluster-name>
+      {{- end }}
       <network>
         <join>
           <multicast enabled="false"/>
           <kubernetes enabled="true">
-            <namespace>okapi-cluster</namespace>
-            <service-name>okapi</service-name>
+            <namespace>{{ .Values.namespace.name }}</namespace>
+            <service-name>{{ .Values.service.name }}</service-name>
           </kubernetes>
         </join>
       </network>
