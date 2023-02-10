@@ -1,5 +1,5 @@
 {{- $fullName := include "okapi.fullname" . -}}
-{{- if eq .Values.clustered.enabled "false" }}
+{{- if eq .Values.clustered.enabled "no" }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:

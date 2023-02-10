@@ -15,8 +15,8 @@ updateStrategy: RollingUpdate
 replicaCount: 3
 
 clustered:
-  enabled: "false"
-  
+  enabled: "no"
+
 image:
   repository: folioorg/okapi
   pullPolicy: Always
@@ -163,7 +163,8 @@ tolerations: []
 affinity: {}
 
 
-secret: {"storage": "postgres","postgres_host": "folio-eks-dev-1-okapi.ccnbl3q7tlkp.us-east-1.rds.amazonaws.com","postgres_username": "okapi_cluster","postgres_password": "9CBlMTQ3MmIQwZUF","postgres_database": "okapi_cluster","okapiurl": "http://okapi:9130"}
+#secret: {"storage": "postgres","postgres_host": "folio-eks-dev-1-okapi.ccnbl3q7tlkp.us-east-1.rds.amazonaws.com","postgres_username": "okapi_cluster","postgres_password": "9CBlMTQ3MmIQwZUF","postgres_database": "okapi_cluster","okapiurl": "http://okapi:9130"}
+secret: { }
 secrets: []
 
 

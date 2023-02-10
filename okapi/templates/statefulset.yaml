@@ -1,5 +1,5 @@
 {{- $fullName := include "okapi.fullname" . -}}
-{{- if eq .Values.clustered.enabled "true" }}
+{{- if eq .Values.clustered.enabled "yes" }}
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
