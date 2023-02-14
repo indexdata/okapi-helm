@@ -79,7 +79,8 @@ For clustered deployments, follow the following steps:
 | podDisruptionBudgetEnabled | bool | `true` |  |
 | podManagementPolicy | string | `"OrderedReady"` | Pod management policy for pods |
 | podSecurityContext | object | `{}` |  |
-| probes | object | `{"liveness":{"enabled":true,"failureThreshold":2,"initialDelaySeconds":120,"path":"/_/proxy/health","periodSeconds":10,"timeoutSeconds":10},"readiness":{"enabled":true,"failureThreshold":2,"initialDelaySeconds":120,"path":"/_/proxy/health","periodSeconds":10,"timeoutSeconds":10},"startup":{"enabled":false,"failureThreshold":30,"path":"/","periodSeconds":10}}` | Specifies whether a liveness probe should be created |
+| probes.liveness | object | `{"enabled":true,"failureThreshold":2,"initialDelaySeconds":120,"path":"/_/proxy/health","periodSeconds":10,"timeoutSeconds":10}` | Specifies whether a liveness probe should be created |
+| probes.readiness | object | `{"enabled":true,"failureThreshold":2,"initialDelaySeconds":120,"path":"/_/proxy/health","periodSeconds":10,"timeoutSeconds":10}` | Specifies whether a readiness probe should be created |
 | probes.startup | object | `{"enabled":false,"failureThreshold":30,"path":"/","periodSeconds":10}` | Specifies whether a startup probe should be created |
 | replicaCount | int | `3` | Number of pods to create (applies to clusteres deployments alone) |
 | resources | object | `{}` |  |
