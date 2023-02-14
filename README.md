@@ -59,7 +59,9 @@ For clustered deployments, follow the following steps:
 | image.tag | string | `"4.14.10"` | Okapi docker image tag |
 | imagePullSecrets | list | `[]` |  |
 | imageSecretName | string | `""` | Image secret for accessing private private docker registries |
-| ingress | object | `{"annotations":{"external-dns.alpha.kubernetes.io/target":"3739406b-kubesystem-foliod-57fa-596039908.us-east-1.elb.amazonaws.com","kubernetes.io/ingress.class":"nginx","nginx.ingress.kubernetes.io/proxy-body-size":"10000m","nginx.ingress.kubernetes.io/proxy-read-timeout":"300","nginx.ingress.kubernetes.io/proxy-request-buffering":"off"},"className":"","enabled":true,"hosts":[{"host":"okapi-cluster-okapi2.folio-dev-us-east-1-1.folio-dev.indexdata.com","paths":[{"path":"/","pathType":"ImplementationSpecific"}]}],"tls":[]}` | Specifies whether an ingress should be created |
+| ingress.enabled | object | `true` | Specifies whether an ingress should be created |
+| ingress.annotations | string | `{"external-dns.alpha.kubernetes.io/target":"3739406b-kubesystem-foliod-57fa-596039908.us-east-1.elb.amazonaws.com","kubernetes.io/ingress.class":"nginx","nginx.ingress.kubernetes.io/proxy-body-size":"10000m","nginx.ingress.kubernetes.io/proxy-read-timeout":"300","nginx.ingress.kubernetes.io/proxy-request-buffering":"off"}` | Ingress annotations |
+| ingress.hosts | object | `{"host":"okapi-cluster-okapi2.folio-dev-us-east-1-1.folio-dev.indexdata.com","paths":[{"path":"/","pathType":"ImplementationSpecific"}]}` | Ingress host |
 | labels.env | string | `"default"` |  |
 | labels.type | string | `"default"` |  |
 | lifecycle | object | `{}` |  |
