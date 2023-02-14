@@ -3,24 +3,35 @@
 # Declare variables to be passed into your templates.
 
 namespace:
-  # Specifies whether a namespace should be created
+# -- Specifies whether a namespace should be created
   create: true
-  # The name of the namespace to use.
+# -- The name of the namespace to deploy resources to. If create namespace is set to false, ensure the namespace exists.
   name: okapi-cluster-helm
 
-imageSecretName: " "
+# -- Image secret for accessing private private docker registries
+imageSecretName: ""
+
+# -- Termination grace period for pods
 terminationGracePeriodSeconds: 300
+
+# -- Pod management policy for pods
 podManagementPolicy: OrderedReady
+
+# -- Update strategy for pods
 updateStrategy: RollingUpdate
+
+# -- Number of pods to create (applies to clusteres deployments alone)
 replicaCount: 3
 
+# -- Specifies whether Okapi is deployed in cluster or standalone mode
 clustered:
   enabled: "no"
 
+# -- Okapi docker image 
 image:
   repository: folioorg/okapi
   pullPolicy: Always
-  # Overrides the image tag whose default is the chart appVersion.
+# -- Okapi docker image tag
   tag: 4.14.10
 
 imagePullSecrets: []
@@ -28,12 +39,11 @@ nameOverride: okapi
 fullnameOverride: okapi
 
 serviceAccount:
-  # Specifies whether a service account should be created
+  # -- Specifies whether a service account should be created
   create: true
-  # Annotations to add to the service account
+  # -- Annotations to add to the service account
   annotations: {}
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
+  # -- The name of the service account to use. If not set and create is true, a name is generated using the fullname template
   name: ""
 
 podAnnotations: {}
@@ -66,6 +76,7 @@ service:
     enabled: false
     port: 9090
 
+# -- Specifies whether a liveness probe should be created
 probes:
   liveness:
     enabled: true
@@ -74,6 +85,8 @@ probes:
     failureThreshold: 2
     timeoutSeconds: 10
     periodSeconds: 10
+
+# -- Specifies whether a readiness probe should be created
   readiness:
     enabled: true
     path: /_/proxy/health
@@ -81,12 +94,15 @@ probes:
     failureThreshold: 2
     timeoutSeconds: 10
     periodSeconds: 10
+
+  # -- Specifies whether a startup probe should be created
   startup:
     enabled: false
     path: /
     failureThreshold: 30
     periodSeconds: 10
 
+# -- Specifies whether an ingress should be created
 ingress:
   enabled: true
   className: ""
@@ -163,8 +179,7 @@ tolerations: []
 affinity: {}
 
 
-#secret: {"storage": "postgres","postgres_host": "folio-eks-dev-1-okapi.ccnbl3q7tlkp.us-east-1.rds.amazonaws.com","postgres_username": "okapi_cluster","postgres_password": "9CBlMTQ3MmIQwZUF","postgres_database": "okapi_cluster","okapiurl": "http://okapi:9130"}
-secret: {"storage": "postgres","postgres_host": "<your_database_host>","postgres_username": "<your_database_username>","postgres_password": "<your_database_password>","postgres_database": "<your_database_name>","okapiurl": "http://okapi:9130"}
+secret: {}
 secrets: []
 
 
