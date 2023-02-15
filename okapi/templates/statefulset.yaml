@@ -135,6 +135,14 @@ spec:
           secret:
             secretName: {{ include "okapi.fullname" . }}
             defaultMode: 420
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: ScheduleAnyway
+        labelSelector:
+          matchLabels:
+       {{- include "okapi.selectorLabels" . | nindent 12 }}
+
       {{- if .Values.nodeSelector }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
