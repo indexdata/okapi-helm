@@ -66,8 +66,7 @@ For clustered deployments, follow the following steps:
 | labels.type | string | `"default"` |  |
 | lifecycle | object | `{}` |  |
 | nameOverride | string | `"okapi"` |  |
-| namespace.create | bool | `true` | Specifies whether a namespace should be created |
-| namespace.name | string | `"okapi-cluster-helm"` | The name of the namespace to deploy resources to. If create namespace is set to false, ensure the namespace exists. |
+| namespace.name | string | `"okapi-cluster-helm"` | The name of the namespace to deploy resources to. Ensure the namespace exists. |
 | nodeSelector | object | `{}` |  |
 | nodeSelector | object | `{}` |  |
 | persistentVolume.accessModes[0] | string | `"ReadWriteOnce"` |  |
