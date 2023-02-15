@@ -3,9 +3,7 @@
 # Declare variables to be passed into your templates.
 
 namespace:
-# -- Specifies whether a namespace should be created
-  create: true
-# -- The name of the namespace to deploy resources to. If create namespace is set to false, ensure the namespace exists.
+# -- The name of the namespace to deploy resources to. Ensure the namespace exists.
   name: okapi-cluster-helm
 
 # -- Image secret for accessing private private docker registries
