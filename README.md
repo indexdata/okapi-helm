@@ -23,6 +23,7 @@ For standalone deployments, follow the following steps:
 
 * Create a secrets.yaml file to hold your environment variables. See example format below:
 
+    
     secret:
     
       storage: postgres
@@ -78,7 +79,8 @@ For clustered deployments, follow the following steps:
 | imagePullSecrets | list | `[]` |  |
 | imageSecretName | string | `""` | Image secret for accessing private private docker registries |
 | ingress.enabled | object | `true` | Specifies whether an ingress should be created |
-| ingress.annotations | object | `{external-dns.alpha.kubernetes.io/target:xxxxxxx.your-dns-target.com,kubernetes.io/ingress.class:nginx,nginx.ingress.kubernetes.io/proxy-body-size:"10000m",nginx.ingress.kubernetes.io/proxy-read-timeout:"300",nginx.ingress.kubernetes.io/proxy-request-buffering:"off"}` | Ingress annotations |
+| ingress.className | object | `""` | Specifies the class for the Ingress
+| ingress.annotations | object | `{external-dns.alpha.kubernetes.io/target:xxxxxxx.your-dns-target.com,nginx.ingress.kubernetes.io/proxy-body-size:"10000m",nginx.ingress.kubernetes.io/proxy-read-timeout:"300",nginx.ingress.kubernetes.io/proxy-request-buffering:"off"}` | Ingress annotations |
 | ingress.hosts | object | `{"host":"xyz.hostname-of-your-service.com","paths":[{"path":"/","pathType":"ImplementationSpecific"}]}` | Ingress host |
 | labels.env | string | `"default"` |  |
 | labels.type | string | `"default"` |  |
