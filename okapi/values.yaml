@@ -2,9 +2,6 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-namespace:
-# -- The name of the namespace to deploy resources to. Ensure the namespace exists.
-  name: okapi-cluster-helm
 
 # -- Image secret for accessing private private docker registries
 imageSecretName: ""
@@ -23,7 +20,7 @@ replicaCount: 3
 
 # -- Specifies whether Okapi is deployed in cluster or standalone mode
 clustered:
-  enabled: "no"
+  enabled: false
 
 # -- Okapi docker image 
 image:
@@ -32,7 +29,6 @@ image:
 # -- Okapi docker image tag
   tag: 4.14.10
 
-imagePullSecrets: []
 nameOverride: okapi
 fullnameOverride: okapi
 
@@ -105,14 +101,14 @@ ingress:
   enabled: true
   className: ""
   annotations: 
-    kubernetes.io/ingress.class: "nginx"
-    external-dns.alpha.kubernetes.io/target: "3739406b-kubesystem-foliod-57fa-596039908.us-east-1.elb.amazonaws.com"
+    kubernetes.io/ingress.class: "your-ingress-class"
+    external-dns.alpha.kubernetes.io/target: "xxxxxxx.your-dns-target.com"
     nginx.ingress.kubernetes.io/proxy-body-size: "10000m"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
     nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
   
   hosts:
-    - host: okapi-cluster-okapi2.folio-dev-us-east-1-1.folio-dev.indexdata.com
+    - host: xyz.hostname-of-your-service.com
       paths:
         - path: /
           pathType: ImplementationSpecific
@@ -174,8 +170,6 @@ nodeSelector: {}
 
 tolerations: []
 
-affinity: {}
-
 
 secret: {"storage": "postgres","postgres_host": "<your_database_host>","postgres_username": "<your_database_username>","postgres_password": "<your_database_password>","postgres_database": "<your_database_name>","okapiurl": "http://okapi:9130"}
 secrets: []
@@ -185,11 +179,9 @@ podDisruptionBudgetEnabled: true
 podDisruptionBudget:
   maxUnavailable: 1
 
-fuse:
-  enabled: false
 
-eks_iam:
-  enabled: false
-  existing:
-    enabled: false
-    name: dummy
+topologySpreadConstraints:
+  maxSkew: 1
+  topologyKey: kubernetes.io/hostname
+  whenUnsatisfiable: ScheduleAnyway
+  

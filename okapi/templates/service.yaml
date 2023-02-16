@@ -4,7 +4,6 @@ metadata:
   name: {{ .Values.service.name }}
   labels:
     {{- include "okapi.labels" . | nindent 4 }}
-  namespace: {{ .Values.namespace.name }}
 spec:
   clusterIP: None
   type: {{ .Values.service.type }}
