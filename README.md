@@ -4,7 +4,6 @@ This helm chart deploys Okapi to a kubernetes cluster.
 
 The helm chart creates the following Kubernetes Objects:
 
-* Namespace - The namespace where Okapi would be deployed.
 * Deployment - A deployment running the Okapi image. (For standalone deployments).
 * Stateful set - A stateful set running the Okapi image. (For cluster deployments).
 * Config maps - Stores configuration for Hazelcast.
@@ -43,30 +42,24 @@ For clustered deployments, follow the following steps:
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` |  |
-| affinity | object | `{}` |  |
 | autoscaling.enabled | bool | `false` |  |
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
-| clustered | object | `{"enabled":"no"}` | Specifies whether Okapi is deployed in cluster or standalone mode |
+| clustered | object | `{"enabled":"false"}` | Specifies whether Okapi is deployed in cluster or standalone mode |
 | config | object | `{}` |  |
-| eks_iam.enabled | bool | `false` |  |
-| eks_iam.existing.enabled | bool | `false` |  |
-| eks_iam.existing.name | string | `"dummy"` |  |
 | fullnameOverride | string | `"okapi"` |  |
-| fuse.enabled | bool | `false` |  |
 | image | object | `{"pullPolicy":"Always","repository":"folioorg/okapi","tag":"4.14.10"}` | Okapi docker image  |
 | image.tag | string | `"4.14.10"` | Okapi docker image tag |
 | imagePullSecrets | list | `[]` |  |
 | imageSecretName | string | `""` | Image secret for accessing private private docker registries |
 | ingress.enabled | object | `true` | Specifies whether an ingress should be created |
-| ingress.annotations | string | `{"external-dns.alpha.kubernetes.io/target":"3739406b-kubesystem-foliod-57fa-596039908.us-east-1.elb.amazonaws.com","kubernetes.io/ingress.class":"nginx","nginx.ingress.kubernetes.io/proxy-body-size":"10000m","nginx.ingress.kubernetes.io/proxy-read-timeout":"300","nginx.ingress.kubernetes.io/proxy-request-buffering":"off"}` | Ingress annotations |
-| ingress.hosts | object | `{"host":"okapi-cluster-okapi2.folio-dev-us-east-1-1.folio-dev.indexdata.com","paths":[{"path":"/","pathType":"ImplementationSpecific"}]}` | Ingress host |
+| ingress.annotations | object | `{"external-dns.alpha.kubernetes.io/target":"your-ingress-class","kubernetes.io/ingress.class":"your-ingress-class","nginx.ingress.kubernetes.io/proxy-body-size":"10000m","nginx.ingress.kubernetes.io/proxy-read-timeout":"300","nginx.ingress.kubernetes.io/proxy-request-buffering":"off"}` | Ingress annotations |
+| ingress.hosts | object | `{"host":"xyz.hostname-of-your-service.com","paths":[{"path":"/","pathType":"ImplementationSpecific"}]}` | Ingress host |
 | labels.env | string | `"default"` |  |
 | labels.type | string | `"default"` |  |
 | lifecycle | object | `{}` |  |
 | nameOverride | string | `"okapi"` |  |
-| namespace.name | string | `"okapi-cluster-helm"` | The name of the namespace to deploy resources to. Ensure the namespace exists. |
 | nodeSelector | object | `{}` |  |
 | nodeSelector | object | `{}` |  |
 | persistentVolume.accessModes[0] | string | `"ReadWriteOnce"` |  |

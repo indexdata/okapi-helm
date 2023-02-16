@@ -1,12 +1,11 @@
 {{- $fullName := include "okapi.fullname" . -}}
-{{- if eq .Values.clustered.enabled "no" }}
+{{- if not .Values.clustered.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "okapi.fullname" . }}
   labels:
     {{- include "okapi.labels" . | nindent 4 }}
-  namespace: {{ .Values.namespace.name }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: 1
@@ -46,13 +45,6 @@ spec:
             - /etc/hazelcast.xml
             - "-cluster-host"
             - $(POD_IP)
-          {{- if .Values.fuse.enabled }}
-          securityContext:
-            privileged: true
-            capabilities:
-              add:
-                - SYS_ADMIN
-          {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}

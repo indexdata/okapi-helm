@@ -1,10 +1,9 @@
 {{- $fullName := include "okapi.fullname" . -}}
-{{- if eq .Values.clustered.enabled "yes" }}
+{{- if .Values.clustered.enabled }}
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: {{ include "okapi.fullname" . }}
-  namespace: {{ .Values.namespace.name }}
   labels:
 {{ include "okapi.labels" . | indent 4 }}
 spec:
@@ -136,9 +135,9 @@ spec:
             secretName: {{ include "okapi.fullname" . }}
             defaultMode: 420
       topologySpreadConstraints:
-      - maxSkew: 1
-        topologyKey: kubernetes.io/hostname
-        whenUnsatisfiable: ScheduleAnyway
+      - maxSkew: {{ .Values.topologySpreadConstraints.maxSkew }}
+        topologyKey: {{ .Values.topologySpreadConstraints.topologyKey }}
+        whenUnsatisfiable: {{ .Values.topologySpreadConstraints.whenUnsatisfiable }}
         labelSelector:
           matchLabels:
        {{- include "okapi.selectorLabels" . | nindent 12 }}
