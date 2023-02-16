@@ -21,21 +21,45 @@ Okapi can either be deployed standalone or as a cluster, the default mode is sta
 
 For standalone deployments, follow the following steps:
 
-* Create a secrets.json file to hold your environment variables. See example format below:
+* Create a secrets.yaml file to hold your environment variables. See example format below:
 
-`secret: {"storage": "postgres","postgres_host": "<your_database_host>","postgres_username": "<your_database_username>","postgres_password": "<your_database_password>","postgres_database": "<your_database_name>","okapiurl": "http://okapi:9130"}`
+    secret:
+    
+      storage: postgres
+    
+      postgres_host: <your_database_host>
+    
+      postgres_username: <your_database_username>
+    
+      postgres_password: <your_database_password>
+    
+      postgres_database: <your_database_name>
+    
+      okapiurl: http://okapi:9130
 
 
-* Run the command `helm install okapi/okapi --values=secrets.json`
+* Run the command `helm install okapi/okapi --namespace <your-namespace> --values=secrets.yaml`
 
 For clustered deployments, follow the following steps:
 
-* Create a secrets.json file to hold your environment variables. See example format below:
+* Create a secrets.yaml file to hold your environment variables. See example format below:
 
-`secret: {"storage": "postgres","postgres_host": "<your_database_host>","postgres_username": "<your_database_username>","postgres_password": "<your_database_password>","postgres_database": "<your_database_name>","okapiurl": "http://okapi:9130"}`
+    secret:
+    
+      storage: postgres
+    
+      postgres_host: <your_database_host>
+    
+      postgres_username: <your_database_username>
+    
+      postgres_password: <your_database_password>
+    
+      postgres_database: <your_database_name>
+    
+      okapiurl: http://okapi:9130
 
 
-* Run the command `helm install okapi/okapi --set clustered.enable=yes --values=secrets.json`
+* Run the command `helm install okapi/okapi --namespace <your-namespace> --values=secrets.yaml --set clustered.enabled=true`
 
 ## Values
 

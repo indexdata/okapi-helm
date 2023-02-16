@@ -99,7 +99,7 @@ probes:
 # -- Specifies whether an ingress should be created
 ingress:
   enabled: true
-  className: ""
+  className: "your-ingress-class"
   annotations: 
     kubernetes.io/ingress.class: "your-ingress-class"
     external-dns.alpha.kubernetes.io/target: "xxxxxxx.your-dns-target.com"
