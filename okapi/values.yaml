@@ -99,9 +99,8 @@ probes:
 # -- Specifies whether an ingress should be created
 ingress:
   enabled: true
-  className: ""
+  className: nginx
   annotations: 
-    kubernetes.io/ingress.class: nginx
     external-dns.alpha.kubernetes.io/target: xxxxxxx.your-dns-target.com
     nginx.ingress.kubernetes.io/proxy-body-size: "10000m"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
