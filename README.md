@@ -38,7 +38,7 @@ For standalone deployments, follow the following steps:
       okapiurl: http://okapi:9130
 
 
-* Run the command `helm install okapi/okapi --namespace <your-namespace> --values=secrets.yaml`
+* Run the command `helm install okapi okapi/okapi --namespace <your-namespace> --values=secrets.yaml`
 
 For clustered deployments, follow the following steps:
 
@@ -59,7 +59,7 @@ For clustered deployments, follow the following steps:
       okapiurl: http://okapi:9130
 
 
-* Run the command `helm install okapi/okapi --namespace <your-namespace> --values=secrets.yaml --set clustered.enabled=true`
+* Run the command `helm install okapi okapi/okapi --namespace <your-namespace> --values=secrets.yaml --set clustered.enabled=true`
 
 ## Values
 
