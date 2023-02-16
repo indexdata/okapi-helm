@@ -78,7 +78,7 @@ For clustered deployments, follow the following steps:
 | imagePullSecrets | list | `[]` |  |
 | imageSecretName | string | `""` | Image secret for accessing private private docker registries |
 | ingress.enabled | object | `true` | Specifies whether an ingress should be created |
-| ingress.annotations | object | `{"external-dns.alpha.kubernetes.io/target":"your-ingress-class","kubernetes.io/ingress.class":"your-ingress-class","nginx.ingress.kubernetes.io/proxy-body-size":"10000m","nginx.ingress.kubernetes.io/proxy-read-timeout":"300","nginx.ingress.kubernetes.io/proxy-request-buffering":"off"}` | Ingress annotations |
+| ingress.annotations | object | `{external-dns.alpha.kubernetes.io/target:xxxxxxx.your-dns-target.com,kubernetes.io/ingress.class:nginx,nginx.ingress.kubernetes.io/proxy-body-size:"10000m",nginx.ingress.kubernetes.io/proxy-read-timeout:"300",nginx.ingress.kubernetes.io/proxy-request-buffering:"off"}` | Ingress annotations |
 | ingress.hosts | object | `{"host":"xyz.hostname-of-your-service.com","paths":[{"path":"/","pathType":"ImplementationSpecific"}]}` | Ingress host |
 | labels.env | string | `"default"` |  |
 | labels.type | string | `"default"` |  |

@@ -3,7 +3,17 @@ entries:
   okapi:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-02-16T17:47:33.430385+01:00"
+    created: "2023-02-16T19:31:00.505082+01:00"
+    description: A Helm chart for deploying Okapi on Kubernetes
+    digest: 4d58dbc2ab1547da467dcbe4713c68b0bdfae5acf634dede9698a6e901f2403b
+    name: okapi
+    type: application
+    urls:
+    - https://indexdata.github.io/okapi-helm/okapi-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-02-16T19:31:00.503681+01:00"
     description: A Helm chart for deploying Okapi on Kubernetes
     digest: e802a1d4f1fb9aa6e771fc73cf7d0b62de5b3249a80cf0d4899587ed65396c1a
     name: okapi
@@ -13,7 +23,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-02-16T17:47:33.429517+01:00"
+    created: "2023-02-16T19:31:00.50218+01:00"
     description: A Helm chart for deploying Okapi on Kubernetes
     digest: 77f774c794cd0738e7dec6a298b357154def0485ccc19b7327194141ce3510a6
     name: okapi
@@ -23,7 +33,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-02-16T17:47:33.42776+01:00"
+    created: "2023-02-16T19:31:00.500751+01:00"
     description: A Helm chart for deploying Okapi on Kubernetes
     digest: fd5e0e8e0f339e99ac6be3d38ed392712f388707c860d46dc3aa69cb85f91e33
     name: okapi
@@ -31,4 +41,4 @@ entries:
     urls:
     - https://indexdata.github.io/okapi-helm/okapi-0.1.0.tgz
     version: 0.1.0
-generated: "2023-02-16T17:47:33.425108+01:00"
+generated: "2023-02-16T19:31:00.498595+01:00"
