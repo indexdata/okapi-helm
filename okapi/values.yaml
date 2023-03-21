@@ -27,7 +27,7 @@ image:
   repository: folioorg/okapi
   pullPolicy: Always
 # -- Okapi docker image tag
-  tag: 4.14.10
+  tag: 4.14.11
 
 nameOverride: okapi
 fullnameOverride: okapi
