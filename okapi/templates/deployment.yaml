@@ -29,8 +29,10 @@ spec:
       labels:
         {{- include "okapi.selectorLabels" . | nindent 8 }}
     spec:
+      {{- if .Values.imageSecretName }}
       imagePullSecrets:
       - name: {{ .Values.imageSecretName }}
+      {{- end }}
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
       serviceAccountName: {{ include "okapi.serviceAccountName" . }}
       containers:
