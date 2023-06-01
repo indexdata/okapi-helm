@@ -75,7 +75,7 @@ For clustered deployments, follow the following steps:
 | config | object | `{}` |  |
 | fullnameOverride | string | `"okapi"` |  |
 | image | object | `{"pullPolicy":"Always","repository":"folioorg/okapi","tag":"4.14.10"}` | Okapi docker image  |
-| image.tag | string | `"4.14.10"` | Okapi docker image tag |
+| image.tag | string | `"5.0.1"` | Okapi docker image tag |
 | imagePullSecrets | list | `[]` |  |
 | imageSecretName | string | `""` | Image secret for accessing private private docker registries |
 | ingress.enabled | object | `true` | Specifies whether an ingress should be created |
