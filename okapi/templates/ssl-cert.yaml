@@ -6,10 +6,7 @@ metadata:
   name: {{ .secretName }}
 type: kubernetes.io/tls
 data:
-  server.crt: |
-    {{ .cert | indent 4 | trimPrefix "    " }}
-
-  server.key: |
-    {{ .key | indent 4 | trimPrefix "    " }}
+  server.crt: {{ .cert }}
+  server.key: {{ .key }}
 {{- end }}
 {{- end }}
