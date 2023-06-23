@@ -116,28 +116,10 @@ ingress:
       hosts:
         - xyz.hostname-of-your-service.com
       
-      cert: |- 
-        -----BEGIN CERTIFICATE-----
-        MDIxCzAJBgNVBAYTAlVTMRYwFAYDVQQKEw1MZXQncyBFbmNyeXB0MQswCQYDVQQD
-        EwJSMzAeFw0yMzA2MjMxMDQ0NDFaFw0yMzA5MjExMDQ0NDBaMC4xLDAqBgNVBAMT
-        I2hlYmlzLW9rYXBpLmZvbGlvLWRldi5pbmRleGRhdGEuY29tMFkwEwYHKoZIzj0C
-        AQYIKoZIzj0DAQcDQgAEJnWrv4AEMqGp7pd5ybOEwNNrQMHyPPA5QYWe4J3n7DFd
-        wQxNuN7SA8TW5edRPKnreo1TtEAF3xbaZXL0KLOZm6OCAiQwggIgMA4GA1UdDwEB
-        XXXXXXXJXXXXXXXXXXXXXJXXXXXXXXXXXJXXXXXXXXXXJXXXXXXXXJXXXXXXJXXX
-        BAIwADAdBgNVHQ4EFgQUfAywNnOfNIrVqJgFwfcVkzy4geQwHwYDVR0jBBgwFoAU
-        FC6zF7dYVsuuUAlA5h+vnYsUwsYwVQYIKwYBBQUHAQEESTBHMCEGCCsGAQUFBzAB
-        hhVodHRwOi8vcjMuby5sZW5jci5vcmcwIgYIKwYBBQUHMAKGFmh0dHA6Ly9yMy5p
-        XafLKlFmVDymjD+n2JuRgirccvO1eXJnZEcZ/a6eLyHSBqRGaj5N7dsJDMYkVHMl
-        +Q4MjTJZ/a7IH/1BzNihJ5WF++cgr5RbhOOGuyVtAeTU79b/E9Pu1IQB/A==
-        -----END CERTIFICATE-----
+      cert: <your-base64-encoded-cert-file-all-on-one-line-no-spaces>
     
-  # -- Specifies the content of the key file for stunnel
-      key: |-
-        -----BEGIN PRIVATE KEY-----
-        MIGHAgEAMBMGAAAAAAAAAAAAAAAAAAA9AwEHBG0wawIBAQQg3SBqKQkln+nc7MYK
-        RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
-        8DlBhZ7gnefsMV3BDE243tIDxNbKKKKKKKKKKKKKKKKQAXfFtplcvQos5mb
-        -----END PRIVATE KEY-----
+  # -- Specifies the content of the key file for tls
+      key: <your-base64-encoded-key-file-all-on-one-line-no-spaces>
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
