@@ -111,15 +111,16 @@ ingress:
       paths:
         - path: /
           pathType: ImplementationSpecific
-  tls:
-    - secretName: chart-example-tls
-      hosts:
-        - xyz.hostname-of-your-service.com
-      
-      cert: <your-base64-encoded-cert-file-all-on-one-line-no-spaces>
+  tls: []
+  #   - secretName: chart-example-tls
+  #     hosts:
+  #       - xyz.hostname-of-your-service.com
+
+  # # -- Specifies the content of the cert file for tls
+  #     cert: <your-base64-encoded-cert-file-all-on-one-line-no-spaces>
     
-  # -- Specifies the content of the key file for tls
-      key: <your-base64-encoded-key-file-all-on-one-line-no-spaces>
+  # # -- Specifies the content of the key file for tls
+  #     key: <your-base64-encoded-key-file-all-on-one-line-no-spaces>
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
