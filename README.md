@@ -82,6 +82,7 @@ For clustered deployments, follow the following steps:
 | ingress.className | object | `""` | Specifies the class for the Ingress
 | ingress.annotations | object | `{external-dns.alpha.kubernetes.io/target:xxxxxxx.your-dns-target.com,nginx.ingress.kubernetes.io/proxy-body-size:"10000m",nginx.ingress.kubernetes.io/proxy-read-timeout:"300",nginx.ingress.kubernetes.io/proxy-request-buffering:"off"}` | Ingress annotations |
 | ingress.hosts | object | `{"host":"xyz.hostname-of-your-service.com","paths":[{"path":"/","pathType":"ImplementationSpecific"}]}` | Ingress host |
+| ingress.tls | list | `[]` | Enable TLS for ingress
 | labels.env | string | `"default"` |  |
 | labels.type | string | `"default"` |  |
 | lifecycle | object | `{}` |  |
