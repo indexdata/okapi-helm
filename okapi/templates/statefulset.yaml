@@ -42,7 +42,7 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           args:
-            - cluster
+            - {{ .Values.mode }}
             - "-conf"
             - /etc/okapi-config.json
             - "-hazelcast-config-file"
