@@ -22,6 +22,9 @@ replicaCount: 3
 clustered:
   enabled: false
 
+# -- Specifies whether Okapi is deployed in cluster or dev mode
+
+mode: cluster
 # -- Okapi docker image 
 image:
   repository: folioorg/okapi
