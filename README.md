@@ -78,14 +78,15 @@ For clustered deployments, follow the following steps:
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | clustered | object | `{"enabled":"false"}` | Specifies whether Okapi is deployed in cluster or standalone mode |
 | config | object | `{}` |  |
-| fullnameOverride | string | `"okapi"` |  |
-| image | object | `{"pullPolicy":"Always","repository":"folioorg/okapi","tag":"4.14.10"}` | Okapi docker image  |
-| image.tag | string | `"5.1.2"` | Okapi docker image tag |
+| fullnameOverride | string | `okapi` |  |
+| image.repository | string | `folioorg/okapi` | Okapi docker image tag |
+| image.pullPolicy | string | `Always` | Okapi docker image tag |
+| image.tag | string | `5.1.2` | Okapi docker image tag |
 | imagePullSecrets | list | `[]` |  |
 | imageSecretName | string | `""` | Image secret for accessing private private docker registries |
 | ingress.enabled | bool | `true` | Specifies whether an ingress should be created |
 | ingress.className | object | `nginx` | Specifies the class for the Ingress
-| ingress.annotations | object | `external-dns.alpha.kubernetes.io/target:xxxxxxx.your-dns-target.com <br/> nginx.ingress.kubernetes.io/proxy-body-size:"10000m",nginx.ingress.kubernetes.io/proxy-read-timeout:"300",nginx.ingress.kubernetes.io/proxy-request-buffering:"off"` | Ingress annotations |
+| ingress.annotations | object | `external-dns.alpha.kubernetes.io/target:xxxxxxx.your-dns-target.com` <br/> `nginx.ingress.kubernetes.io/proxy-body-size:"10000m"`<br/> `nginx.ingress.kubernetes.io/proxy-read-timeout:"300"` <br/> `nginx.ingress.kubernetes.io/proxy-request-buffering:"off"` | Ingress annotations |
 | ingress.hosts | object | `{"host":"xyz.hostname-of-your-service.com","paths":[{"path":"/","pathType":"ImplementationSpecific"}]}` | Ingress host |
 | ingress.tls | list | `[]` | Enable TLS for ingress
 | labels.env | string | `"default"` |  |
