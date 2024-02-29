@@ -76,7 +76,7 @@ For clustered deployments, follow the following steps:
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
-| clustered | object | `{"enabled":"false"}` | Specifies whether Okapi is deployed in cluster or standalone mode |
+| clustered.enabled | object | `false` | Specifies whether Okapi is deployed in cluster or standalone mode |
 | config | object | `{}` |  |
 | fullnameOverride | string | `okapi` |  |
 | image.repository | string | `folioorg/okapi` | Okapi docker image tag |
