@@ -87,7 +87,7 @@ For clustered deployments, follow the following steps:
 | ingress.enabled | bool | `true` | Specifies whether an ingress should be created |
 | ingress.className | object | `nginx` | Specifies the class for the Ingress
 | ingress.annotations | object | `external-dns.alpha.kubernetes.io/target:xxxxxxx.your-dns-target.com` <br/> `nginx.ingress.kubernetes.io/proxy-body-size:"10000m"`<br/> `nginx.ingress.kubernetes.io/proxy-read-timeout:"300"` <br/> `nginx.ingress.kubernetes.io/proxy-request-buffering:"off"` | Ingress annotations |
-| ingress.hosts | object | `{"host":"xyz.hostname-of-your-service.com","paths":[{"path":"/","pathType":"ImplementationSpecific"}]}` | Ingress host |
+| ingress.hosts | list | `{"host":"xyz.hostname-of-your-service.com","paths":[{"path":"/","pathType":"ImplementationSpecific"}]}` | Ingress host |
 | ingress.tls | list | `[]` | Enable TLS for ingress
 | labels.env | string | `"default"` |  |
 | labels.type | string | `"default"` |  |
@@ -106,9 +106,22 @@ For clustered deployments, follow the following steps:
 | podDisruptionBudgetEnabled | bool | `true` |  |
 | podManagementPolicy | string | `"OrderedReady"` | Pod management policy for pods |
 | podSecurityContext | object | `{}` |  |
-| probes.liveness | object | `{"enabled":true,"failureThreshold":2,"initialDelaySeconds":120,"path":"/_/proxy/health","periodSeconds":10,"timeoutSeconds":10}` | Specifies whether a liveness probe should be created |
-| probes.readiness | object | `{"enabled":true,"failureThreshold":2,"initialDelaySeconds":120,"path":"/_/proxy/health","periodSeconds":10,"timeoutSeconds":10}` | Specifies whether a readiness probe should be created |
-| probes.startup | object | `{"enabled":false,"failureThreshold":30,"path":"/","periodSeconds":10}` | Specifies whether a startup probe should be created |
+| probes.liveness.enabled | bool | `true` | Specifies whether a liveness probe should be created |
+| probes.liveness.path | string | `/_/proxy/health` | Specifies path for liveness probe |
+| probes.liveness.initialDelaySeconds | int | `120` | Specifies initial delay before liveness probe starts |
+| probes.liveness.failureThreshold | int| `2` | Specifies failure threshold for liveness probe |
+| probes.liveness.timeoutSeconds | int | `10` | Specifies timeout in seconds for liveness probe |
+| probes.liveness.periodSecond | int | `10` | Specifies period in seconds for liveness probe |
+| probes.readiness.enabled | bool | `true` | Specifies whether a readiness probe should be created |
+| probes.readiness.failureThreshold | int | `2` | Specifies initial delay before readiness probe starts|
+| probes.readiness.initialDelaySeconds | int | `120` | Specifies initial delay before readiness probe starts |
+| probes.readiness.path | string | `/_/proxy/health` | Specifies path for readiness probe  |
+| probes.readiness.periodSeconds | int | `10` | Specifies period in seconds for readiness probe |
+| probes.readiness.timeoutSeconds | int | `10` | Specifies timeout in seconds for readiness probe |
+| probes.startup.enabled | object | `false`| Specifies whether a startup probe should be created |
+| probes.startup.failureThreshold | int | `30`| Specifies failure threshold for startup probe |
+| probes.startup.path | string | `/`| Specifies path for readiness probe |
+| probes.startup.periodSeconds | int | `10`| Specifies period in seconds for startup probe |
 | replicaCount | int | `3` | Number of pods to create (applies to clusteres deployments alone) |
 | resources | object | `{}` |  |
 | secret | object | `{}` |  |
@@ -131,6 +144,9 @@ For clustered deployments, follow the following steps:
 | terminationGracePeriodSeconds | int | `300` | Termination grace period for pods |
 | tolerations | list | `[]` |  |
 | tolerations | list | `[]` |  |
-| updateStrategy | string | `"RollingUpdate"` | Update strategy for pods |
+| updateStrategy | string | `RollingUpdate` | Update strategy for pods |
+| topologySpreadConstraints.maxSkew | int | `1` | Max Skew for spread topology constraint |
+| topologySpreadConstraints.topologyKey | string | `kubernetes.io/hostname` | Topology Key for spread topology constraint |
+| topologySpreadConstraints.whenUnsatisfiable | string | `ScheduleAnyway` | Action when spread topology constraint is unsatisfiable  |
 
 ----------------------------------------------
