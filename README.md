@@ -28,7 +28,7 @@ For standalone deployments, follow the following steps:
 
 * Create a secrets.yaml file to hold your environment variables. See example format below:
 
-    
+```yaml    
     secret:
     
       storage: postgres
@@ -42,14 +42,14 @@ For standalone deployments, follow the following steps:
       postgres_database: <your_database_name>
     
       okapiurl: http://okapi:9130
-
+```
 
 * Run the command `helm install okapi okapi/okapi --namespace <your-namespace> --values=secrets.yaml`
 
 For clustered deployments, follow the following steps:
 
 * Create a secrets.yaml file to hold your environment variables. See example format below:
-
+```yaml
     secret:
     
       storage: postgres
@@ -63,7 +63,7 @@ For clustered deployments, follow the following steps:
       postgres_database: <your_database_name>
     
       okapiurl: http://okapi:9130
-
+```
 
 * Run the command `helm install okapi okapi/okapi --namespace <your-namespace> --values=secrets.yaml --set clustered.enabled=true`
 
