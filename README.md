@@ -1,6 +1,6 @@
 # Okapi-helm
 
-Copyright (C) 2017-2023 Index Data
+Copyright (C) 2024 Index Data
 
 This software is distributed under the terms of the Apache License,
 Version 2.0. See the file "[LICENSE](LICENSE)" for more information.
