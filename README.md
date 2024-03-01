@@ -7,6 +7,16 @@ Version 2.0. See the file "[LICENSE](LICENSE)" for more information.
 
 This helm chart deploys Okapi to a kubernetes cluster and is offered by Index Data only as is. There is no support implied unless under contract.
 
+## Okapi version changes across chart versions
+
+ Chart Version | Okapi version |
+|-----|------|
+| 0.1.3 | 4.14.10 |
+| 0.1.4 | 4.14.11 |
+| 0.1.7 | 4.14.12|
+| 0.1.15 | 5.0.1|
+| 0.1.16 | 5.1.2 |
+
 The helm chart creates the following Kubernetes Objects:
 
 * Deployment - A deployment running the Okapi image. (For standalone deployments).
