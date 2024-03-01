@@ -102,6 +102,7 @@ secret:
 | labels.env | string | `"default"` |  |
 | labels.type | string | `"default"` |  |
 | lifecycle | object | `{}` |  |
+| mode | string | `cluster` | `Acceptable values are "dev" or "cluster"` |
 | nameOverride | string | `"okapi"` |  |
 | nodeSelector | object | `{}` |  |
 | nodeSelector | object | `{}` |  |
