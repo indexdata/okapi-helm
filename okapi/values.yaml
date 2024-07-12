@@ -25,6 +25,8 @@ clustered:
 # -- Specifies whether Okapi is deployed in cluster or dev mode
 
 mode: cluster
+
+javaOptions: -Djava.awt.headless=true -Dlog4j.configurationFile=/etc/log4j2.xml -Dhost=$(POD_IP) -Dnodename=$(POD_NAME) -Dhazelcast.logging.type=log4j -Dhazelcast.shutdownhook.policy=GRACEFUL -Dhazelcast.graceful.shutdown.max.wait=300 -Dlog4j2.formatMsgNoLookups=true
 # -- Okapi docker image 
 image:
   repository: folioorg/okapi
