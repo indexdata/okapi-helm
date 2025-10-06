@@ -16,6 +16,8 @@ This helm chart deploys Okapi to a kubernetes cluster and is offered by Index Da
 | 0.1.7 | 4.14.12|
 | 0.1.15 | 5.0.1|
 | 0.1.16 | 5.1.2 |
+| 0.1.17 | 5.1.2 |
+| 0.1.18 | 6.2.5 |
 
 The helm chart creates the following Kubernetes Objects:
 
