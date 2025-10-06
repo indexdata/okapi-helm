@@ -8,7 +8,7 @@ data:
     <hazelcast xmlns="http://www.hazelcast.com/schema/config"
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                xsi:schemaLocation="http://www.hazelcast.com/schema/config
-               https://www.hazelcast.com/schema/config/hazelcast-config-4.2.xsd">        
+               https://www.hazelcast.com/schema/config/hazelcast-config-{{ .Values.hazelcast.config }.xsd">        
       <cluster-name>okapi-cluster</cluster-name>
       <network>
         <join>
