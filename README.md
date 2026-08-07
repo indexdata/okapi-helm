@@ -18,6 +18,7 @@ This helm chart deploys Okapi to a kubernetes cluster and is offered by Index Da
 | 0.1.16 | 5.1.2 |
 | 0.1.17 | 5.1.2 |
 | 0.1.18 | 6.2.5 |
+| 0.1.19 | 6.2.8 |
 
 The helm chart creates the following Kubernetes Objects:
 
@@ -96,7 +97,7 @@ secret:
 | image.tag | string | `5.1.2` | Okapi docker image tag |
 | imagePullSecrets | list | `[]` |  |
 | imageSecretName | string | `""` | Image secret for accessing private private docker registries |
-| ingress.enabled | bool | `true` | Specifies whether an ingress should be created |
+| ingress.enabled | bool | `false` | Specifies whether an ingress should be created |
 | ingress.className | object | `nginx` | Specifies the class for the Ingress
 | ingress.annotations | object | `external-dns.alpha.kubernetes.io/target:xxxxxxx.your-dns-target.com` <br/> `nginx.ingress.kubernetes.io/proxy-body-size:"10000m"`<br/> `nginx.ingress.kubernetes.io/proxy-read-timeout:"300"` <br/> `nginx.ingress.kubernetes.io/proxy-request-buffering:"off"` | Ingress annotations |
 | ingress.hosts | list | `{"host":"xyz.hostname-of-your-service.com","paths":[{"path":"/","pathType":"ImplementationSpecific"}]}` | Ingress host |
