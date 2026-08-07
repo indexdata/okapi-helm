@@ -32,7 +32,7 @@ image:
   repository: folioorg/okapi
   pullPolicy: Always
 # -- Okapi docker image tag
-  tag: 6.2.5
+  tag: 6.2.8
 hazelcast:
   config: 5.3
 nameOverride: okapi
