@@ -19,6 +19,7 @@ This helm chart deploys Okapi to a kubernetes cluster and is offered by Index Da
 | 0.1.17 | 5.1.2 |
 | 0.1.18 | 6.2.5 |
 | 0.1.19 | 6.2.8 |
+| 0.1.20 | 6.2.8 |
 
 The helm chart creates the following Kubernetes Objects:
 
@@ -102,6 +103,7 @@ secret:
 | ingress.annotations | object | `external-dns.alpha.kubernetes.io/target:xxxxxxx.your-dns-target.com` <br/> `nginx.ingress.kubernetes.io/proxy-body-size:"10000m"`<br/> `nginx.ingress.kubernetes.io/proxy-read-timeout:"300"` <br/> `nginx.ingress.kubernetes.io/proxy-request-buffering:"off"` | Ingress annotations |
 | ingress.hosts | list | `{"host":"xyz.hostname-of-your-service.com","paths":[{"path":"/","pathType":"ImplementationSpecific"}]}` | Ingress host |
 | ingress.tls | list | `[]` | Enable TLS for ingress
+| javaOptions | string | `-Djava.awt.headless=true -Dlog4j.configurationFile=/etc/log4j2.xml -Dhost=$(POD_IP) -Dnodename=$(POD_NAME) -Dhazelcast.logging.type=log4j -Dhazelcast.shutdownhook.policy=GRACEFUL -Dhazelcast.graceful.shutdown.max.wait=300 -Dlog4j2.formatMsgNoLookups=true` | JAVA_OPTIONS environment variable. Including this overwrites the default
 | labels.env | string | `"default"` |  |
 | labels.type | string | `"default"` |  |
 | lifecycle | object | `{}` |  |
